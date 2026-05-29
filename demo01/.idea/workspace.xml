@@ -34,20 +34,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/JetBrains/IdeaProjects/demo01&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Admin/IdeaProjects/demo01/src/Main.java&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="83b00608-3c05-4b34-a690-7a2ec1d742ab" name="Changes" comment="" />
@@ -60,7 +54,12 @@
       <workItem from="1779210382428" duration="6000" />
       <workItem from="1779243055922" duration="1966000" />
       <workItem from="1779259001100" duration="2076000" />
-      <workItem from="1779261150805" duration="100000" />
+      <workItem from="1779261255221" duration="66000" />
+      <workItem from="1779261386064" duration="757000" />
+      <workItem from="1779262163137" duration="620000" />
+      <workItem from="1779634609752" duration="2135000" />
+      <workItem from="1779677074968" duration="635000" />
+      <workItem from="1779684895694" duration="70000" />
     </task>
     <servers />
   </component>
