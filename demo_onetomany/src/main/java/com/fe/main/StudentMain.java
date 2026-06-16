@@ -1,7 +1,7 @@
 package com.fe.main;
 
-import com.fe.repository.IStudentRepository;
-import com.fe.repository.StudentRepository;
+import com.fe.service.IStudentService;
+import com.fe.service.StudentService;
 import com.fe.pojo.Student;
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class StudentMain {
             System.out.println("Please enter a number !");
             inputKey = console.nextInt();
 
-            IStudentRepository studentRepo = new StudentRepository("JPAs");
+            IStudentService studentService = new StudentService("JPAs");
             Student student = new Student("Huy", "Tran", 9);
 
             switch (inputKey) {
@@ -32,17 +32,17 @@ public class StudentMain {
                     com.fe.pojo.Book b1 = new com.fe.pojo.Book("Catalin Tudose", "9781617299186",
                             "Java Persistence with Spring");
                     student.addBook(b1);
-                    studentRepo.save(student);
+                    studentService.save(student);
                     break;
                 case 2:
-                    studentRepo.delete(1);
+                    studentService.delete(1);
                     break;
                 case 3:
                     student = new Student(1, "Luyen", "Huynh", 9);
-                    studentRepo.update(student);
+                    studentService.update(student);
                     break;
                 case 4:
-                    studentRepo.findById(1);
+                    studentService.findById(1);
                     break;
                 default:
                     System.out.println("Please choice menu !");
