@@ -1,11 +1,9 @@
 package com.fe.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import com.fe.pojo.Student;
 
 public class StudentDAO {
@@ -24,10 +22,14 @@ public class StudentDAO {
             em.persist(student);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            em.getTransaction().rollback();
-            System.out.println("Error " + ex.getMessage());
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Error in save: " + ex.getMessage());
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
@@ -35,12 +37,14 @@ public class StudentDAO {
         Student student = null;
         try {
             em = emf.createEntityManager();
-            em.getTransaction().begin();
+            // Đọc dữ liệu (find) KHÔNG cần mở transaction (begin)
             student = em.find(Student.class, studentID);
         } catch (Exception ex) {
-            System.out.println("Error " + ex.getMessage());
+            System.out.println("Error in findById: " + ex.getMessage());
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
         return student;
     }
@@ -50,12 +54,14 @@ public class StudentDAO {
         List<Student> students = null;
         try {
             em = emf.createEntityManager();
-            em.getTransaction().begin();
+            // Đọc dữ liệu (createQuery) KHÔNG cần mở transaction (begin)
             students = em.createQuery("from Student").getResultList();
         } catch (Exception ex) {
-            System.out.println("Error " + ex.getMessage());
+            System.out.println("Error in getStudents: " + ex.getMessage());
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
         return students;
     }
@@ -65,12 +71,24 @@ public class StudentDAO {
             em = emf.createEntityManager();
             em.getTransaction().begin();
             Student s = em.find(Student.class, studentID);
-            em.remove(s);
-            em.getTransaction().commit();
+            if (s != null) {
+                em.remove(s);
+                em.getTransaction().commit();
+            } else {
+                System.out.println("Student with ID " + studentID + " not found for deletion.");
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+            }
         } catch (Exception ex) {
-            System.out.println("Error " + ex.getMessage());
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Error in delete: " + ex.getMessage());
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
@@ -84,11 +102,21 @@ public class StudentDAO {
                 s.setLastName(student.getLastName());
                 s.setMarks(student.getMarks());
                 em.getTransaction().commit();
+            } else {
+                System.out.println("Student with ID " + student.getId() + " not found for update.");
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
             }
         } catch (Exception ex) {
-            System.out.println("Error " + ex.getMessage());
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Error in update: " + ex.getMessage());
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 }

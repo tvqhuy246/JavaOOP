@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "STUDENTS")
@@ -23,6 +29,14 @@ public class Student {
 
     @Column(name = "marks")
     private int marks;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "STUDENT_BOOK",
+        joinColumns = @JoinColumn(name = "student_id"),
+        inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> books = new ArrayList<>();
 
     public Student() {
     }
@@ -70,5 +84,18 @@ public class Student {
 
     public void setMarks(int marks) {
         this.marks = marks;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
+        book.getStudents().add(this);
     }
 }
